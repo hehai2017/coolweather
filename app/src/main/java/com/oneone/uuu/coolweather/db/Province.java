@@ -1,10 +1,12 @@
 package com.oneone.uuu.coolweather.db;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by uuu on 17-8-14.
  */
 
-public class Province extends DataSupport {
+public class Province extends DataSupport{
     private int id;
     private String provinceName;
     private int provinceCode;
