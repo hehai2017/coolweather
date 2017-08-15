@@ -1,10 +1,12 @@
 package com.oneone.uuu.coolweather.db;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by uuu on 17-8-14.
  */
 
-public class City extends DataSupport {
+public class City extends DataSupport{
     private int id;
     private String cityName;
     private int cityCode;
@@ -22,7 +24,7 @@ public class City extends DataSupport {
         return cityName;
     }
 
-    public void setCityName（String cityName）{
+    public void setCityName(String cityName）{
         this.cityName = cityName;
     }
 
