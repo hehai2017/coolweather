@@ -1,5 +1,6 @@
 package com.oneone.uuu.coolweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -22,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.annotations.SerializedName;
 import com.oneone.uuu.coolweather.gson.Forecast;
 import com.oneone.uuu.coolweather.gson.Weather;
+import com.oneone.uuu.coolweather.service.AutoUpdateService;
 import com.oneone.uuu.coolweather.util.HttpUtil;
 import com.oneone.uuu.coolweather.util.Utility;
 
@@ -83,7 +85,7 @@ public class WeatherActivity extends AppCompatActivity {
         navButton = (Button)findViewById(R.id.nav_button);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather",null);
-        final String weatherId;
+        //final String weatherId;
         if(weatherString!=null){
             Weather weather = Utility.handleWeatherResponse(weatherString);
             mWeatherId = weather.basic.weatherId;
@@ -192,6 +194,12 @@ public class WeatherActivity extends AppCompatActivity {
             carWashText.setText(carWash);
             sportText.setText(sport);
             weatherLayout.setVisibility(View.VISIBLE);
+        }
+        if(weather!=null && "ok".equals(weather.status)){
+            Intent intent = new Intent(this, AutoUpdateService.class);
+            startService(intent);
+        }else {
+            Toast.makeText(WeatherActivity.this,"获取天气信息失败",Toast.LENGTH_SHORT).show();
         }
     }
 
